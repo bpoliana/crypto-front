@@ -1,6 +1,6 @@
 import { createMuiTheme } from '@material-ui/core/styles';
 
-const theme = createMuiTheme({
+const appTheme = createMuiTheme({
   palette: {
     primary: {
       main: '#009688',
@@ -10,8 +10,8 @@ const theme = createMuiTheme({
       light: '#efefef',
       main: '#bdbdbd',
       dark: '#8d8d8d'
-    },
-  },
+    }
+  }
 })
 
-export { theme }
+export { appTheme }
