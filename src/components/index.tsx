@@ -1,11 +1,12 @@
 import React from 'react'
-import { Button, ThemeProvider } from '@material-ui/core'
-import { theme } from './theme'
+import { ThemeProvider } from '@material-ui/core'
+import { appTheme } from './theme'
+import { Login } from './Login/Login'
 
 const App = () => {
-  return(
-    <ThemeProvider theme={theme}>
-      <Button>Login</Button>
+  return (
+    <ThemeProvider theme={appTheme}>
+      <Login />
     </ThemeProvider>
   )
 }
