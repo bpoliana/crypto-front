@@ -5,7 +5,17 @@ export const useStyles = makeStyles((theme: Theme) =>
     root: {
       width: '100%',
       maxWidth: 360,
-      backgroundColor: theme.palette.background.paper
+      backgroundColor: theme.palette.background.paper,
+      alignItems: 'center'
+    },
+    card: {
+      marginTop: theme.spacing(10),
+      minWidth: 300,
+      alignItems: 'center',
+      padding: theme.spacing(2)
+    },
+    grid: {
+      display: 'grid'
     }
   })
 )
