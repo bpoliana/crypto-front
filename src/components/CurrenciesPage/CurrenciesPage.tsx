@@ -1,9 +1,28 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Card, Container, Grid, List, ListItem, ListItemText } from '@material-ui/core'
 import { useStyles } from './CurrenciesPage.styles'
+import { getCurrencies } from '../../client/client'
 
 const CurrenciesPage = () => {
+  const [btc, setBtc] = useState('')
+  const [usd, setUsd] = useState('')
+  const [brl, setBrl] = useState('')
+  const [eur, setEur] = useState('')
+  const [cad, setCad] = useState('')
+
+  useEffect( () => {
+    async function setApiCurrencies () {
+      const currencies = await getCurrencies()
+      setBtc(currencies.bpi.BTC.rate)
+      setUsd(currencies.bpi.USD.rate)
+      setBrl(currencies.bpi.BRL.rate)
+      setEur(currencies.bpi.EUR.rate)
+      setCad(currencies.bpi.CAD.rate)
+    }
+    setApiCurrencies()
+  }, [])
+
   const classes = useStyles()
   const history = useHistory()
 
@@ -16,19 +35,19 @@ const CurrenciesPage = () => {
       <Card className={classes.card}>
         <List>
           <ListItem>
-            <ListItemText primary='BTC' secondary='1'/>
+            <ListItemText primary='BTC' secondary={btc} />
           </ListItem>
           <ListItem>
-            <ListItemText primary='USD' secondary='6,000'/>
+            <ListItemText primary='USD' secondary={usd} />
           </ListItem>
           <ListItem>
-            <ListItemText primary='BRL' secondary='6,000'/>
+            <ListItemText primary='BRL' secondary={brl} />
           </ListItem>
           <ListItem>
-            <ListItemText primary='EUR' secondary='6,000'/>
+            <ListItemText primary='EUR' secondary={eur} />
           </ListItem>
           <ListItem>
-            <ListItemText primary='CAD' secondary='6,000'/>
+            <ListItemText primary='CAD' secondary={cad} />
           </ListItem>
         </List>
         <Grid className={classes.grid}>

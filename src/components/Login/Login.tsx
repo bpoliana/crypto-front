@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Card, CardActions, CardContent, CardHeader, TextField } from '@material-ui/core'
 import { useStyles } from './Login.styles'
-import { getHome, postLogin } from '../../client/client'
+import { postLogin } from '../../client/client'
 
 const Login = () => {
   const classes = useStyles()
@@ -12,7 +12,6 @@ const Login = () => {
 
   const login = async (email, password) => {
     const response = await postLogin(email, password)
-    console.log(response)
     localStorage.setItem('token', response.data.token)
     history.push('/home')
   }

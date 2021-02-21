@@ -5,26 +5,8 @@ import { appTheme } from './theme'
 import { Login } from './Login/Login'
 import { CurrenciesPage } from './CurrenciesPage/CurrenciesPage'
 import UpdateCurrency from './UpdateCurrency/UpdateCurrency'
-import { getHome } from '../client/client'
 
 class App extends Component {
-  constructor (props) {
-    super(props)
-    this.state = { apiResponse: '' }
-  }
-
-  callAPI () {
-    try {
-      this.setState({ apiResponse: getHome() })
-    } catch (err) {
-      alert(err)
-    }
-  }
-
-  componentDidMount () {
-    this.callAPI()
-  }
-
   render () {
     return (
       <ThemeProvider theme={appTheme}>
