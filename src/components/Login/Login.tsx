@@ -1,11 +1,11 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Card, CardActions, CardContent, CardHeader, TextField } from '@material-ui/core'
 import { useStyles } from './Login.styles'
 
 const Login = () => {
   const classes = useStyles()
-  let history = useHistory()
+  const history = useHistory()
 
   const redirect = () => {
     history.push('/home')
@@ -29,7 +29,7 @@ const Login = () => {
               type='password'
               name='password'
               variant='standard'
-              placeholder='Password'
+              placeholder='Senha'
               margin='normal'
             />
           </div>
