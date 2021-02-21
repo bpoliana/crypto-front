@@ -4,7 +4,7 @@ import axios from 'axios'
 import { ThemeProvider } from '@material-ui/core'
 import { appTheme } from './theme'
 import { Login } from './Login/Login'
-import { CurrenciesView } from './CurrenciesView/CurrenciesView'
+import { CurrenciesPage } from './CurrenciesPage/CurrenciesPage'
 
 class App extends Component {
   constructor (props) {
@@ -33,7 +33,7 @@ class App extends Component {
         <BrowserRouter>
           <Route exact path="/" component={Login} />
           <Route exact path="/api/login" component={Login} />
-          <Route exact path="/home" component={CurrenciesView} />
+          <Route exact path="/home" component={CurrenciesPage} />
         </BrowserRouter>
       </ThemeProvider>
     )
