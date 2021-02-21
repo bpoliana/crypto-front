@@ -5,15 +5,18 @@ import { useStyles } from './CurrenciesPage.styles'
 
 const CurrenciesPage = () => {
   const classes = useStyles()
-  let history = useHistory()
+  const history = useHistory()
 
   const redirect = () => {
-    history.push('/')
+    history.push('/update')
   }
 
   return (
     <Container className={classes.root}>
       <List >
+        <ListItem>
+          <ListItemText primary='BTC' secondary='1'/>
+        </ListItem>
         <ListItem>
           <ListItemText primary='USD' secondary='6,000'/>
         </ListItem>

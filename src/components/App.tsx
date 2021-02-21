@@ -5,6 +5,7 @@ import { ThemeProvider } from '@material-ui/core'
 import { appTheme } from './theme'
 import { Login } from './Login/Login'
 import { CurrenciesPage } from './CurrenciesPage/CurrenciesPage'
+import UpdateCurrency from './UpdateCurrency/UpdateCurrency'
 
 class App extends Component {
   constructor (props) {
@@ -32,8 +33,9 @@ class App extends Component {
       <ThemeProvider theme={appTheme}>
         <BrowserRouter>
           <Route exact path="/" component={Login} />
-          <Route exact path="/api/login" component={Login} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/home" component={CurrenciesPage} />
+          <Route exact path="/update" component={UpdateCurrency} />
         </BrowserRouter>
       </ThemeProvider>
     )
