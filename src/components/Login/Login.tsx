@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { useHistory } from 'react-router-dom'
 import { Button, Card, CardActions, CardContent, CardHeader, TextField } from '@material-ui/core'
 import { useStyles } from './Login.styles'
 
 const Login = () => {
   const classes = useStyles()
+  let history = useHistory()
 
+  const redirect = () => {
+    history.push('/home')
+  }
   return (
     <form className={classes.root}>
       <Card className={classes.card}>
@@ -30,7 +35,7 @@ const Login = () => {
           </div>
         </CardContent>
         <CardActions className={classes.buttonWrapper}>
-          <Button color='primary' variant='contained'>
+          <Button color='primary' variant='contained' onClick={redirect}>
             ENTRAR
           </Button>
         </CardActions>
