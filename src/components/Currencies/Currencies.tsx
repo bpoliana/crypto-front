@@ -14,14 +14,15 @@ const Currencies = () => {
   useEffect(() => {
     async function setApiCurrencies (): Promise<void> {
       const currencies = await getCurrencies()
-      if (currencies.status === 200) {
+      if (currencies?.status === 200) {
         setBtc({ rate: currencies.data.bpi.BTC.rate, rate_float: currencies.data.bpi.BTC.rate_float })
         setUsd({ rate: currencies.data.bpi.USD.rate, rate_float: currencies.data.bpi.USD.rate_float })
         setBrl({ rate: currencies.data.bpi.BRL.rate, rate_float: currencies.data.bpi.BRL.rate_float })
         setEur({ rate: currencies.data.bpi.EUR.rate, rate_float: currencies.data.bpi.EUR.rate_float })
         setCad({ rate: currencies.data.bpi.CAD.rate, rate_float: currencies.data.bpi.CAD.rate_float })
       } else {
-        alert(currencies.data.message)
+        redirect('/')
+        alert(currencies.data.message ? currencies.data.message : 'Houve um erro na sua requisição')
       }
     }
     setApiCurrencies()
@@ -30,9 +31,10 @@ const Currencies = () => {
   const classes = useStyles()
   const history = useHistory()
 
-  const redirect = () => {
-    history.push('/update')
+  const redirect = (routeParam: string) => {
+    history.push(routeParam)
   }
+
   const updateCurrencyValues = (event) => {
     const newBTC = event.target.value
     const newBRL = newBTC * brl.rate_float
@@ -69,7 +71,7 @@ const Currencies = () => {
           </ListItem>
         </List>
         <Grid className={classes.grid}>
-          <Button color='primary' variant='contained' onClick={redirect} title=''>
+          <Button color='primary' variant='contained' onClick={() => { redirect('/update') } } title=''>
             Adicionar valor monetário
           </Button>
         </Grid>

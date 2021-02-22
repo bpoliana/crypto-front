@@ -24,21 +24,22 @@ export default function NativeSelects () {
   useEffect(() => {
     async function setApiCurrencies () {
       const currenciesResponse = await getCurrencies()
-      if (currenciesResponse.status === 200) {
+      if (currenciesResponse?.status === 200) {
         setCurrencies({
           BRL: currenciesResponse.data.bpi.BRL.rate,
           CAD: currenciesResponse.data.bpi.CAD.rate,
           EUR: currenciesResponse.data.bpi.EUR.rate
         })
       } else {
+        redirect('/')
         alert(currenciesResponse.data.message)
       }
     }
     setApiCurrencies()
   }, [])
 
-  const redirect = () => {
-    history.push('/home')
+  const redirect = (routeParam: string) => {
+    history.push(routeParam)
   }
 
   const submit = async () => {
@@ -52,12 +53,11 @@ export default function NativeSelects () {
           CAD: currenciesResponse.data.bpi.CAD.rate,
           EUR: currenciesResponse.data.bpi.EUR.rate
         })
-        redirect()
       } else {
         alert(currenciesResponse.data.message)
       }
     } else {
-      alert(response.data.message)
+      alert(response.data.message ? response.data.message : 'Houve um erro na sua requisição')
     }
   }
 
@@ -81,7 +81,7 @@ export default function NativeSelects () {
 
         <Card className={classes.card}>
           <Grid className={classes.goBackButton}>
-            <Button color='secondary' variant='contained' onClick={redirect}> Voltar </Button>
+            <Button color='secondary' variant='contained' onClick={(e) => { redirect('/') }}> Voltar </Button>
           </Grid>
           <FormControl className={classes.formControl}>
             <InputLabel shrink htmlFor="currency-native-label-placeholder">

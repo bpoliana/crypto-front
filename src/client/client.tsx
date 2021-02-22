@@ -17,7 +17,7 @@ export const getCurrencies = async () => {
       Authorization: localStorage.getItem('token')
     }
     const response = await axios.get(`${cryptoApiUrl}/api/crypto/btc`, { headers: header }).catch(err => err.response)
-    localStorage.setItem('token', response.config.headers.Authorization)
+    localStorage.setItem('token', response?.config.headers.Authorization)
     return response
   } catch (err) {
     alert(err)
