@@ -18,6 +18,8 @@ Para subir a aplicação localmente:
 ```
 npm run dev
 ```
+A aplicação roda por default na porta `9000`. E aponta para o backend da api na porta `3000`
+Para visualizar a home, vá para `localhost:9000` no browser de sua preferência. 
 
 ## Testando 
 Para rodar os Testes Unitários use o comando: 
