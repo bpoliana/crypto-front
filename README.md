@@ -37,7 +37,7 @@ Na tentativa de manter padrões sensatos durante a implementação, utlizei o `e
 
 A estrutura desse projeto consiste na separação dos componentes em:
 - `Login` - onde estão é renderizado o form de login referente ao endpoint da crypto-api: `POST /api/login`
-- `Currencies`- onde são renderizados os valores das moedas vindas do endpoint: `GET /api/crypto/btc`
+- `Currencies`- onde são renderizados os valores das moedas vindas do endpoint: `GET /api/crypto/btc`. Nessa rota, que é a home, os valores das moedas se alteram conforme o valor inserido para `BTC`, mas isso não é alterado no backend. 
 - `UpdateCurrency` - onde é renderizado o form para atualização do valor de alguma moeda, referente ao endpoint: `POST /api/crypto/btc`
 ### TO DO List 
 
