@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import { Button, Card, Container, Grid, List, ListItem, ListItemText, TextField } from '@material-ui/core'
-import { useStyles } from './CurrenciesPage.styles'
+import { useStyles } from './Currencies.styles'
 import { getCurrencies } from '../../client/client'
 
-const CurrenciesPage = () => {
+const Currencies = () => {
   const [btc, setBtc] = useState({ rate: '', rate_float: 0 })
   const [usd, setUsd] = useState({ rate: '', rate_float: 0 })
   const [brl, setBrl] = useState({ rate: '', rate_float: 0 })
@@ -78,4 +78,4 @@ const CurrenciesPage = () => {
   )
 }
 
-export { CurrenciesPage }
+export { Currencies }
