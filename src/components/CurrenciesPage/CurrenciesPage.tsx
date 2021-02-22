@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Button, Card, Container, Grid, InputLabel, List, ListItem, ListItemText, TextField } from '@material-ui/core'
+import { Button, Card, Container, Grid, List, ListItem, ListItemText, TextField } from '@material-ui/core'
 import { useStyles } from './CurrenciesPage.styles'
 import { getCurrencies } from '../../client/client'
 
@@ -12,7 +12,7 @@ const CurrenciesPage = () => {
   const [cad, setCad] = useState({ rate: '', rate_float: 0 })
 
   useEffect(() => {
-    async function setApiCurrencies () {
+    async function setApiCurrencies (): Promise<void> {
       const currencies = await getCurrencies()
       if (currencies.status === 200) {
         setBtc({ rate: currencies.data.bpi.BTC.rate, rate_float: currencies.data.bpi.BTC.rate_float })
