@@ -34,13 +34,13 @@ const CurrenciesPage = () => {
     history.push('/update')
   }
   const updateCurrencyValues = (event) => {
-    const newBTC = parseInt(event.target.value)
+    const newBTC = event.target.value
     const newBRL = newBTC * brl.rate_float
     const newCAD = newBTC * cad.rate_float
     const newUSD = newBTC * usd.rate_float
     const newEUR = newBTC * eur.rate_float
 
-    setBtc({ rate: event.target.value, rate_float: newBTC })
+    setBtc({ rate: newBTC.toString(), rate_float: newBTC })
     setBrl({ ...brl, rate: newBRL.toString() })
     setCad({ ...cad, rate: newCAD.toString() })
     setUsd({ ...usd, rate: newUSD.toString() })

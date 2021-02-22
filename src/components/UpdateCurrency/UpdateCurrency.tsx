@@ -21,11 +21,9 @@ export default function NativeSelects () {
     EUR: '0'
   })
 
-
   useEffect(() => {
     async function setApiCurrencies () {
       const currenciesResponse = await getCurrencies()
-      console.log(currenciesResponse)
       if (currenciesResponse.status === 200) {
         setCurrencies({
           BRL: currenciesResponse.data.bpi.BRL.rate,
@@ -102,7 +100,7 @@ export default function NativeSelects () {
               <option value={'CAD'}>CAD</option>
             </NativeSelect>
             <FormHelperText className={classes.formHelperText}>Valor atual: {getSelectedCurrencyValue()} </FormHelperText>
-            <TextField required id="outlined-basic" variant="outlined" label="Novo Valor" type="number" onChange={(e) => { setCurrencyValue(parseInt(e.target.value)) }} defaultValue="" />
+            <TextField required id="outlined-basic" variant="outlined" label="Novo Valor" type="number" onChange={(e) => { setCurrencyValue(parseFloat(e.target.value)) }} defaultValue="" />
             <Button className={classes.buttonWrapper} color='primary' variant='contained' onClick={ async () => { submit() }} > Atualizar </Button>
           </FormControl>
         </Card>
