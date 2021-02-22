@@ -11,14 +11,18 @@ const CurrenciesPage = () => {
   const [eur, setEur] = useState('')
   const [cad, setCad] = useState('')
 
-  useEffect( () => {
+  useEffect(() => {
     async function setApiCurrencies () {
       const currencies = await getCurrencies()
-      setBtc(currencies.bpi.BTC.rate)
-      setUsd(currencies.bpi.USD.rate)
-      setBrl(currencies.bpi.BRL.rate)
-      setEur(currencies.bpi.EUR.rate)
-      setCad(currencies.bpi.CAD.rate)
+      if (currencies.status === 200) {
+        setBtc(currencies.data.bpi.BTC.rate)
+        setUsd(currencies.data.bpi.USD.rate)
+        setBrl(currencies.data.bpi.BRL.rate)
+        setEur(currencies.data.bpi.EUR.rate)
+        setCad(currencies.data.bpi.CAD.rate)
+      } else {
+        alert(currencies.data.message)
+      }
     }
     setApiCurrencies()
   }, [])

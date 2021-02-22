@@ -4,7 +4,7 @@ const cryptoApiUrl = 'http://localhost:3000'
 
 export const postLogin = async (email, password) => {
   try {
-    return await axios.post(`${cryptoApiUrl}/api/login`, { email: email, password: password }).catch(err => err)
+    return await axios.post(`${cryptoApiUrl}/api/login`, { email: email, password: password }).catch(err => err.response)
   } catch (err) {
     alert(err)
   }
@@ -16,9 +16,9 @@ export const getCurrencies = async () => {
       'Content-Type': 'application/json',
       Authorization: localStorage.getItem('token')
     }
-    const response = await axios.get(`${cryptoApiUrl}/api/crypto/btc`, { headers: header }).catch(err => err)
+    const response = await axios.get(`${cryptoApiUrl}/api/crypto/btc`, { headers: header }).catch(err => err.response)
     localStorage.setItem('token', response.config.headers.Authorization)
-    return response.data
+    return response
   } catch (err) {
     alert(err)
   }
@@ -34,9 +34,9 @@ export const postCurrency = async (currency, value) => {
       currency: currency,
       value: value
     }
-    const response = await axios.post(`${cryptoApiUrl}/api/crypto/btc`, body, { headers: header }).catch(err => err)
+    const response = await axios.post(`${cryptoApiUrl}/api/crypto/btc`, body, { headers: header }).catch(err => err.response)
     localStorage.setItem('token', response.config.headers.Authorization)
-    return response.data
+    return response
   } catch (err) {
     alert(err)
   }

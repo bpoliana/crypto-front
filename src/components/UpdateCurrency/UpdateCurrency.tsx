@@ -25,11 +25,16 @@ export default function NativeSelects () {
   useEffect(() => {
     async function setApiCurrencies () {
       const currenciesResponse = await getCurrencies()
-      setCurrencies({
-        BRL: currenciesResponse.bpi.BRL.rate,
-        CAD: currenciesResponse.bpi.CAD.rate,
-        EUR: currenciesResponse.bpi.EUR.rate
-      })
+      console.log(currenciesResponse)
+      if (currenciesResponse.status === 200) {
+        setCurrencies({
+          BRL: currenciesResponse.data.bpi.BRL.rate,
+          CAD: currenciesResponse.data.bpi.CAD.rate,
+          EUR: currenciesResponse.data.bpi.EUR.rate
+        })
+      } else {
+        alert(currenciesResponse.data.message)
+      }
     }
     setApiCurrencies()
   }, [])
@@ -39,13 +44,23 @@ export default function NativeSelects () {
   }
 
   const submit = async () => {
-    await postCurrency(currencySelected, currencyValue)
-    const currenciesResponse = await getCurrencies()
-    setCurrencies({
-      BRL: currenciesResponse.bpi.BRL.rate,
-      CAD: currenciesResponse.bpi.CAD.rate,
-      EUR: currenciesResponse.bpi.EUR.rate
-    })
+    const response = await postCurrency(currencySelected, currencyValue)
+    if (response.status === 200) {
+      const currenciesResponse = await getCurrencies()
+
+      if (currenciesResponse.status === 200) {
+        setCurrencies({
+          BRL: currenciesResponse.data.bpi.BRL.rate,
+          CAD: currenciesResponse.data.bpi.CAD.rate,
+          EUR: currenciesResponse.data.bpi.EUR.rate
+        })
+        redirect()
+      } else {
+        alert(currenciesResponse.data.message)
+      }
+    } else {
+      alert(response.data.message)
+    }
   }
 
   const getSelectedCurrencyValue = () => {

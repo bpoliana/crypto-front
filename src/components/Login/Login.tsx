@@ -12,8 +12,12 @@ const Login = () => {
 
   const login = async (email, password) => {
     const response = await postLogin(email, password)
-    localStorage.setItem('token', response.data.token)
-    history.push('/home')
+    if (response.status === 200) {
+      localStorage.setItem('token', response.data.token)
+      history.push('/home')
+    } else {
+      alert(response.data.message)
+    }
   }
   return (
     <form className={classes.root}>
