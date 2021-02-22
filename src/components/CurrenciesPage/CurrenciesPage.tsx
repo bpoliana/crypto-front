@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Button, Card, Container, Grid, List, ListItem, ListItemText } from '@material-ui/core'
+import { Button, Card, Container, Grid, InputLabel, List, ListItem, ListItemText, TextField } from '@material-ui/core'
 import { useStyles } from './CurrenciesPage.styles'
 import { getCurrencies } from '../../client/client'
 
 const CurrenciesPage = () => {
-  const [btc, setBtc] = useState('')
-  const [usd, setUsd] = useState('')
-  const [brl, setBrl] = useState('')
-  const [eur, setEur] = useState('')
-  const [cad, setCad] = useState('')
+  const [btc, setBtc] = useState({ rate: '', rate_float: 0 })
+  const [usd, setUsd] = useState({ rate: '', rate_float: 0 })
+  const [brl, setBrl] = useState({ rate: '', rate_float: 0 })
+  const [eur, setEur] = useState({ rate: '', rate_float: 0 })
+  const [cad, setCad] = useState({ rate: '', rate_float: 0 })
 
   useEffect(() => {
     async function setApiCurrencies () {
       const currencies = await getCurrencies()
       if (currencies.status === 200) {
-        setBtc(currencies.data.bpi.BTC.rate)
-        setUsd(currencies.data.bpi.USD.rate)
-        setBrl(currencies.data.bpi.BRL.rate)
-        setEur(currencies.data.bpi.EUR.rate)
-        setCad(currencies.data.bpi.CAD.rate)
+        setBtc({ rate: currencies.data.bpi.BTC.rate, rate_float: currencies.data.bpi.BTC.rate_float })
+        setUsd({ rate: currencies.data.bpi.USD.rate, rate_float: currencies.data.bpi.USD.rate_float })
+        setBrl({ rate: currencies.data.bpi.BRL.rate, rate_float: currencies.data.bpi.BRL.rate_float })
+        setEur({ rate: currencies.data.bpi.EUR.rate, rate_float: currencies.data.bpi.EUR.rate_float })
+        setCad({ rate: currencies.data.bpi.CAD.rate, rate_float: currencies.data.bpi.CAD.rate_float })
       } else {
         alert(currencies.data.message)
       }
@@ -33,25 +33,39 @@ const CurrenciesPage = () => {
   const redirect = () => {
     history.push('/update')
   }
+  const updateCurrencyValues = (event) => {
+    const newBTC = parseInt(event.target.value)
+    const newBRL = newBTC * brl.rate_float
+    const newCAD = newBTC * cad.rate_float
+    const newUSD = newBTC * usd.rate_float
+    const newEUR = newBTC * eur.rate_float
+
+    setBtc({ rate: event.target.value, rate_float: newBTC })
+    setBrl({ ...brl, rate: newBRL.toString() })
+    setCad({ ...cad, rate: newCAD.toString() })
+    setUsd({ ...usd, rate: newUSD.toString() })
+    setEur({ ...eur, rate: newEUR.toString() })
+  }
 
   return (
     <Container className={classes.root}>
       <Card className={classes.card}>
         <List>
           <ListItem>
-            <ListItemText primary='BTC' secondary={btc} />
+          { btc.rate && <TextField id="outlined-basic" label="BTC" type="number" onChange={updateCurrencyValues} defaultValue={ btc.rate } /> }
+
           </ListItem>
           <ListItem>
-            <ListItemText primary='USD' secondary={usd} />
+            <ListItemText primary='USD' secondary={usd.rate} />
           </ListItem>
           <ListItem>
-            <ListItemText primary='BRL' secondary={brl} />
+            <ListItemText primary='BRL' secondary={brl.rate} />
           </ListItem>
           <ListItem>
-            <ListItemText primary='EUR' secondary={eur} />
+            <ListItemText primary='EUR' secondary={eur.rate} />
           </ListItem>
           <ListItem>
-            <ListItemText primary='CAD' secondary={cad} />
+            <ListItemText primary='CAD' secondary={cad.rate} />
           </ListItem>
         </List>
         <Grid className={classes.grid}>
