@@ -42,6 +42,6 @@ A estrutura desse projeto consiste na separação dos componentes em:
 ### TO DO List 
 
 - Testes unitários para os componentes
-- Refatorar trechos do componente `Currencies` que poderiam ser métodos e componentes seperados
+- Refatorar trechos do componente `Currencies` e `UpdateCurrency` que poderiam ser métodos e componentes seperados
 - Criar um GlobalState para passar os dados e InitialState
 - Criar um reducer para gerar um Global Provider
